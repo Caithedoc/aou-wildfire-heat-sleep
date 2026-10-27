@@ -7,9 +7,10 @@ curated data repository version 9 (C2025Q4R6) through BigQuery; intermediate tab
 workspace-scoped BigQuery dataset (`wildfire_sleep`) and a Parquet cache on the VM. Nothing participant-level
 left the Workbench.
 
-`requirements-vm-freeze.txt` is the output of `pip freeze` captured on the same application on 2026-10-27,
-after all analyses reported in the manuscript had been run; no packages were added or upgraded on the VM
-between the analyses and the capture. The Python interpreter version is given in the file header.
+`requirements-vm-freeze.txt` will be the output of `pip freeze` captured on the same application after all analyses
+reported in the manuscript had been run (no packages were added or upgraded on the VM after the analyses). It is
+committed before the tagged release; if this file is absent in the commit you are reading, the capture had not yet
+been committed.
 
 Each script states in its docstring the inputs it expects, the outputs it writes, and the command used to run it.
 Run order: 01 (schema reconnaissance, read-only) -> 02 (cohort and outcome extraction) -> upload of the local
