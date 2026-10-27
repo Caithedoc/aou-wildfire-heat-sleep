@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+# No data or results are tracked in this repository
+*.csv
+*.parquet
+*.csv.gz
+*.png
+*.pdf
+*.svg
+*.log

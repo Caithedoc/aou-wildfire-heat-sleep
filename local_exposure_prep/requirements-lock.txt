@@ -1,0 +1,32 @@
+# Python 3.14.7 (macOS, arm64). Generated with `pip freeze` on 2026-10-27 from the virtual environment
+# used to run local_exposure_prep/03_smokepm_zip3_prep.py, 05_tmin_zip3_prep.py and 07_zip3_aggregation_error.py.
+affine==3.0.0
+attrs==26.1.0
+certifi==2026.7.22
+click==8.5.0
+contourpy==1.3.3
+cycler==0.12.1
+fonttools==4.63.0
+formulaic==1.2.2
+interface_meta==2.0.1
+kiwisolver==1.5.1
+lxml==6.1.2
+matplotlib==3.11.1
+narwhals==2.25.0
+numpy==2.5.2
+packaging==26.3
+pandas==3.0.5
+patsy==1.0.3
+pillow==12.3.0
+pyarrow==25.0.1
+pyparsing==3.3.2
+pypdf==6.16.2
+pyreadr==0.5.6
+python-dateutil==2.9.0.post0
+python-docx==1.2.0
+rasterio==1.5.1
+scipy==1.18.1
+six==1.17.0
+statsmodels==0.15.0
+typing_extensions==4.16.0
+wrapt==2.4.0

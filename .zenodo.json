@@ -1,0 +1,11 @@
+{
+  "title": "Analysis code for: Joint Exposure to Wildfire Smoke and Extreme Heat and Wearable-Measured Sleep Characteristics Among US Adults",
+  "upload_type": "software",
+  "description": "Analysis code, software-environment records, and the dated analysis plan for a time-stratified self-matched (case-crossover) study of wildfire smoke, extreme heat, and their joint occurrence in relation to wearable-measured sleep among adults in the All of Us Research Program (Controlled Tier curated data repository v9, 2016-2023). The repository contains no participant-level data and no All of Us data of any kind; All of Us data are available to authorized users through the Researcher Workbench.",
+  "creators": [
+    {"name": "Zhang, Cai", "affiliation": "University of Illinois Urbana-Champaign", "orcid": "0009-0002-7206-7813"}
+  ],
+  "license": "MIT",
+  "keywords": ["wildfire smoke", "extreme heat", "compound exposure", "sleep", "wearable devices", "All of Us Research Program", "case-crossover"],
+  "access_right": "open"
+}

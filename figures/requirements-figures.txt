@@ -1,0 +1,7 @@
+# Figure scripts were run with the macOS system interpreter /usr/bin/python3 (Python 3.9.6, arm64).
+# Versions below are those installed in that interpreter on 2026-10-27 (verified with importlib.metadata); they are
+# the only third-party packages the figure scripts import.
+matplotlib==3.5.3
+numpy==1.26.4
+pandas==1.4.4
+python-docx==1.2.0
