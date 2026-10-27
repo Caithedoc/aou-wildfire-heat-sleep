@@ -1,5 +1,7 @@
 # Joint exposure to wildfire smoke and extreme heat and wearable-measured sleep: analysis code
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23700935.svg)](https://doi.org/10.5281/zenodo.23700935)
+
 Code, software-environment records, and the dated analysis plan for the manuscript
 
 > Zhang C, Trevathan E, Qian Z. *Joint Exposure to Wildfire Smoke and Extreme Heat and Wearable-Measured Sleep Characteristics Among US Adults.* (manuscript under submission, 2026)
@@ -97,7 +99,8 @@ the checksum recorded in the project log at finalisation where one exists, and o
 
 ## Citing
 
-Please cite the manuscript and this repository (`CITATION.cff`; a Zenodo DOI is assigned to the released version).
+Please cite the manuscript and this repository (`CITATION.cff`). The released version v1.0.0 is archived on Zenodo:
+https://doi.org/10.5281/zenodo.23700935.
 
 ## License and contact
 
