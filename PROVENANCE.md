@@ -32,8 +32,15 @@ Notes.
 The scripts are the versions that produced the reported results, with one class of edit made for this release:
 in the figure scripts, the hard-coded path to the authors' local project folder (`BASE = "/Users/.../CZ_AoU_WildfireSleep_08_26_26_V1"`)
 was replaced by the repository root (`BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))`),
-with `import os` added where it was missing. No analytic code was changed. Scripts that belong to other projects
-(a feasibility-count script for a separate study) and archived earlier figure drafts were not included.
+with `import os` added where it was missing. No analytic code was changed.
+
+Workbench scripts were taken from the Workbench application itself on 2026-10-27 (SHA-256 of each file verified
+against the copy on the VM), so they are the versions that produced the reported results; see
+`workbench/ENVIRONMENT.md`. Not included: scripts that belong to other projects (a feasibility-count script for a
+separate study), archived earlier figure drafts, two small one-off patch scripts whose effects are already contained
+in the as-run `04` and `07`, and three Workbench scripts (ZIP3 map export, minimum-nights sweep, an earlier
+secondary-outcome script) and two figure scripts that were drafted but never run, whose outputs do not appear in
+the manuscript.
 
 ## File checksums
 

@@ -24,6 +24,7 @@ import pandas as pd
 
 CDRP = "wb-clever-rhubarb-4688"
 DS = f"{CDRP}.wildfire_sleep"
+DS_TICK = chr(96) + DS + ".analysis_nights" + chr(96)
 THRESH = 20  # 主定义; 敏感性 10 / 35
 
 
@@ -87,17 +88,14 @@ print(bq(f"""SELECT COUNT(*) nights, COUNT(DISTINCT person_id) persons,
 import statsmodels.api as sm
 
 import os
-
-CACHE = "analysis_nights.parquet"   # VM 本地缓存, 重跑敏感性不必再下载 5 分钟
+CACHE = "analysis_nights.parquet"
 df = None
 try:
     if os.path.exists(CACHE):
-        df = pd.read_parquet(CACHE)
-        print("loaded from cache")
+        df = pd.read_parquet(CACHE); print("loaded from cache")
     else:
         import pandas_gbq
-        df = pandas_gbq.read_gbq(f"SELECT * FROM `{DS}.analysis_nights`",
-                                 project_id=CDRP, progress_bar_type=None)
+        df = pandas_gbq.read_gbq("SELECT * FROM " + DS_TICK, project_id=CDRP, progress_bar_type=None)
         df.to_parquet(CACHE, index=False)
 except Exception:
     subprocess.run(["bash", "-c",
@@ -107,16 +105,10 @@ except Exception:
 if df is None:
     raise SystemExit("pandas_gbq 不可用, 改走 bq extract + 本地读 (见上一段)")
 print("rows in memory:", len(df))
-
-# pandas_gbq 返回可空扩展类型 (Int64/Float64/boolean), statsmodels 只吃 numpy;
-# 数值列统一降成 float64, 缺失保持 NaN (2026-08-28 实测必需)。
-NUMCOLS = ["minute_asleep", "minute_awake", "minute_deep", "minute_rem",
-           "sleep_efficiency", "smoke", "smoke_l1", "smoke_l2", "smoke_l3",
-           "smoke_l4", "smoke_l5", "smoke_l6", "smoke_l7", "smoke_lead1",
-           "tmean", "tmean_l1"]
-for c in NUMCOLS:
-    if c in df.columns:
-        df[c] = pd.to_numeric(df[c], errors="coerce").astype("float64")
+NUMCOLS = ["minute_asleep","minute_awake","minute_deep","minute_rem","sleep_efficiency","smoke","smoke_l1","smoke_l2","smoke_l3","smoke_l4","smoke_l5","smoke_l6","smoke_l7","smoke_lead1","tmean","tmean_l1"]
+for _c in NUMCOLS:
+    if _c in df.columns:
+        df[_c] = pd.to_numeric(df[_c], errors="coerce").astype("float64")
 
 df["stratum"] = df["person_id"].astype(str) + "_" + df["ym"].astype(str) + "_" + df["dow"].astype(str)
 for c in ["smoke", "smoke_l1", "smoke_l2", "smoke_l3", "smoke_l4",
@@ -148,7 +140,7 @@ def fe_ols(dat, ycol, xcols, label):
 results = []
 TADJ = ["tmean", "tmean2"]
 
-# 主分析: lag0-1 累积 (b_smoke + b_smoke_l1), 结局 = 总睡眠时长
+# 主分析: lag0-1 累租 (b_smoke + b_smoke_l1), 结局 = 总睡眠时长
 results.append(fe_ols(df, "minute_asleep", ["b_smoke", "b_smoke_l1"] + TADJ, "primary_lag01"))
 
 # 分布滞后 0-7 (同模)
@@ -175,4 +167,4 @@ allres = pd.concat(results, ignore_index=True)
 allres.to_csv("phaseD_results.csv", index=False)
 print("saved phaseD_results.csv (聚合系数表, 可导出)")
 
-# %% Step 4: 阈值敏感性 10/35 与 3-14h 窗放宽 —— 改 THRESH / 清理窗后重跑本脚本。
+# %% Step 4: 阈值敏感性 10/35 与 3-14h 窗放宽ꀔ— 改 THRESH / 清理窗后重跑本脚本。

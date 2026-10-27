@@ -46,23 +46,26 @@ Census ZCTA gazetteer (centroids), and the PRISM daily files.
 
 | Script | What it does |
 |---|---|
-| `01_cdr_recon.py` | Read-only reconnaissance of the Controlled Tier tables and columns (wearables sleep tables, ZIP3, dates). |
-| `02_sleep_cohort_extract.py` | Extracts main-sleep-episode nights and participant covariates into a workspace BigQuery dataset. Nothing participant-level leaves the Workbench. |
-| `04_casecrossover_analysis.py` | Links nights to the uploaded ZIP3-day exposure panel and fits the prespecified time-stratified case-crossover models (strata = person × calendar month × day of week; within-stratum fixed-effects OLS), including distributed lags (0-7), alternative smoke thresholds (10/35 µg/m³), continuous smoke, and the next-day (lead) negative control. |
-| `06_phaseE_ml.py` | Machine-learning companions: counterfactual expected-sleep baseline, causal-forest effect heterogeneity with GATES calibration, and inverse-probability weighting for nightly wear. |
+| `01_cdr_recon.py` | Read-only reconnaissance of the Controlled Tier tables and columns (wearables sleep tables, ZIP3, dates). Run cell by cell in a notebook. |
+| `02_sleep_cohort_extract.py` | Extracts main-sleep-episode nights and participant covariates into a workspace BigQuery dataset. Run cell by cell in a notebook. Nothing participant-level leaves the Workbench. |
+| `04_casecrossover_analysis.py` | Links nights to the uploaded ZIP3-day exposure panel and fits the prespecified time-stratified case-crossover models (strata = person × calendar month × day of week; within-stratum fixed-effects OLS), including distributed lags (0-7), continuous smoke, the no-temperature-adjustment model, and the next-day (lead) negative control. |
+| `05_sensitivity.py` | Alternative smoke thresholds (10 and 35 µg/m³) and stratification by device data source. |
+| `06_phaseE.py` | Machine-learning companions: counterfactual expected-sleep baseline (gradient boosting), heterogeneous-effect quintiles with GATES calibration, prespecified subgroups, and the first smoke × heat joint model. |
+| `07_remaining.py` | Inverse-probability weighting for nightly wear, time negative control, exclusion of hot days, the June 2023 East Coast smoke episode, and West versus East comparisons. |
+| `08_tables.py` | Attrition waterfall and the descriptive tables (participant and night level, by year). |
+| `09_final.py` | Time negative control (redefined), wider sleep-window sensitivity (60-960 minutes), exclusion of 2023, and E-values. |
+| `10_negctrl.py` | Time negative control restricted to low-smoke ZIP3-years in fire-season months. |
 | `11_revision.py` | Joint (compound) exposure analyses: four-category smoke × heat models, continuous joint response curves and surface, the 3 × 3 threshold robustness matrix, formal subgroup interaction tests, secondary outcomes, Table 1, and Figure 1 count exports. |
+| `12_reconcile.py` | Reconciles the joint-exposure night counts between the pre-filter and regression frames and writes the final four-category and interaction models. |
 | `12_recluster_tempflex.py` | Variance and temperature-specification ladder: standard errors clustered by person, ZIP3, ZIP3-day, and two-way, plus ZIP3-level wild cluster bootstrap *P* values; temperature adjustment from none through linear, quadratic, natural splines of mean temperature, and night-time minimum temperature; delta-method confidence intervals for the joint-minus-additive contrast. |
-| `13_zip3_heterogeneity_restrict.py` | Sensitivity analyses restricted to ZIP3 areas with low within-area smoke heterogeneity (rules prespecified in `07`). |
+| `13_ipw.py` | Inverse-probability-of-wear weighting for the joint-exposure interaction, with the wear model trained on a sampled person-day panel. |
+| `13_zip3_heterogeneity_restrict.py` | Sensitivity analyses restricted to ZIP3 areas with low within-area smoke heterogeneity (rules prespecified in `07_zip3_aggregation_error.py`). |
 | `14_region_by_heterogeneity.py` | Post hoc regional decomposition of the heterogeneity-restricted result. |
 | `15_subgroup_characteristics.py` | Participant characteristics by subgroup and the remaining marginal subgroup estimates. |
-| `16_zip3_map_export.py` | Aggregates the analytic sample by ZIP3 for mapping; ZIP3 rows with 1-20 participants or nights are blanked before export. |
-| `17_min_nights_sweep.py` | Sensitivity of the interaction to the minimum number of analytic nights per participant. |
-| `18_secondary_joint.py` | Prespecified secondary outcomes under the joint-exposure model. |
 | `19_sleep_domains_rebuild.py`, `20_sleep_domains_joint.py` | Sleep-domain outcomes (continuity, timing, architecture, and composite sleep-health indicators) rebuilt from the wearables summary tables and fitted with the same model specification; prespecified in the 2026-10-12 addenda. |
 | `21_table1_quartiles.py` | Table 1 overall and by quartile of participant-mean wildfire-specific PM2.5. |
 
-Run order and the execution environment are described in `workbench/ENVIRONMENT.md`. Every export from the
-Workbench is an aggregate table in which any cell corresponding to 1-20 participants is suppressed, in line with the
+Run order and the execution environment are described in `workbench/ENVIRONMENT.md`. Every export from the Workbench is an aggregate table in which any cell corresponding to 1-20 participants is suppressed, in line with the
 All of Us Data and Statistics Dissemination Policy.
 
 ### 3. Figures (`figures/`)
@@ -72,8 +75,7 @@ All of Us Data and Statistics Dissemination Policy.
 | `make_fig_compound_zcta_map.py` | Figure 1: hot-and-smoky days per ZCTA, 2016-2023 (public exposure data only). |
 | `make_fig_jno_v9.py` | Figure 2 (joint exposure categories) and eFigure 7 (continuous joint response curves). |
 | `make_efig_jno_v9.py` | eFigures 1-6 (flowchart, subgroups, distributed lag, causal-forest calibration, specification robustness, exposure nights over time and by region). |
-| `make_efig_min_nights_sweep.py` | Minimum-nights sensitivity figure. |
-| `make_fig_map_zip3.py`, `lu_palette.py` | Participant bubble map by ZIP3 and the shared palette. |
+| `lu_palette.py` | Shared palette used by the map figure. |
 | `make_figures.py`, `make_fig1_overview.py` to `make_fig4_interaction_robustness.py` | Figures of earlier versions of the manuscript, kept for completeness. |
 
 The figure scripts read the aggregate CSVs exported from the Workbench (and, for some eFigures, the supplement
