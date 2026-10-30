@@ -1,6 +1,6 @@
 # Joint exposure to wildfire smoke and extreme heat and wearable-measured sleep: analysis code
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23700935.svg)](https://doi.org/10.5281/zenodo.23700935)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23700934.svg)](https://doi.org/10.5281/zenodo.23700934)
 
 Code, software-environment records, and the dated analysis plan for the manuscript
 
@@ -66,6 +66,7 @@ Census ZCTA gazetteer (centroids), and the PRISM daily files.
 | `15_subgroup_characteristics.py` | Participant characteristics by subgroup and the remaining marginal subgroup estimates. |
 | `19_sleep_domains_rebuild.py`, `20_sleep_domains_joint.py` | Sleep-domain outcomes (continuity, timing, architecture, and composite sleep-health indicators) rebuilt from the wearables summary tables and fitted with the same model specification; prespecified in the 2026-10-12 addenda. |
 | `21_table1_quartiles.py` | Table 1 overall and by quartile of participant-mean wildfire-specific PM2.5. |
+| `22_table1_smoking.py` | Smoking status (never, former, current, not reported) from the All of Us Lifestyle survey for Table 1, overall and by quartile; same sample and quartile cut points as `21_table1_quartiles.py`. Added 2026-10-30 (v1.1.0) at a co-author's request. |
 
 Run order and the execution environment are described in `workbench/ENVIRONMENT.md`. Every export from the Workbench is an aggregate table in which any cell corresponding to 1-20 participants is suppressed, in line with the
 All of Us Data and Statistics Dissemination Policy.
@@ -99,8 +100,9 @@ the checksum recorded in the project log at finalisation where one exists, and o
 
 ## Citing
 
-Please cite the manuscript and this repository (`CITATION.cff`). The released version v1.0.0 is archived on Zenodo:
-https://doi.org/10.5281/zenodo.23700935.
+Please cite the manuscript and this repository (`CITATION.cff`). All released versions are archived on Zenodo under the concept DOI https://doi.org/10.5281/zenodo.23700934, which
+resolves to the latest version. Version DOIs: v1.0.0 (2026-10-27) https://doi.org/10.5281/zenodo.23700935;
+v1.1.0 (2026-10-30, adds `22_table1_smoking.py`) is listed on the Zenodo page.
 
 ## License and contact
 

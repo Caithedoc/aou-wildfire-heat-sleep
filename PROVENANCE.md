@@ -42,6 +42,18 @@ in the as-run `04` and `07`, and three Workbench scripts (ZIP3 map export, minim
 secondary-outcome script) and two figure scripts that were drafted but never run, whose outputs do not appear in
 the manuscript.
 
+## Addition on 2026-10-30 (v1.1.0)
+
+`workbench/22_table1_smoking.py` was added after a co-author asked for smoking status in Table 1. It was written
+locally, uploaded to the same Workbench application (Python 3.12.13; package list unchanged from
+`requirements-vm-freeze.txt`), verified by SHA-256 against the uploaded copy, and run once on 2026-10-30 (33 s).
+It reuses the regression sample and the participant-level quartile assignment of `21_table1_quartiles.py` (the
+quartile cut points it reports are identical to those in the earlier run) and derives never / former / current /
+not reported from the Lifestyle survey items "100 cigarettes in lifetime" and "smoke frequency", taking each
+participant's earliest answer. No other script or result changed. The `MANIFEST.sha256` shipped with v1.0.0 was
+generated one commit before the DOI was added to `README.md` and `CITATION.cff`, so its entries for those two files
+were stale; the manifest is regenerated at v1.1.0 from the committed tree.
+
 ## File checksums
 
 `MANIFEST.sha256` lists the SHA-256 checksum of every file in the repository at release.

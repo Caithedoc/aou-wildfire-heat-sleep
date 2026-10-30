@@ -7,10 +7,17 @@ authors:
     given-names: Cai
     orcid: "https://orcid.org/0009-0002-7206-7813"
     affiliation: "Department of Health and Kinesiology, University of Illinois Urbana-Champaign"
-version: 1.0.0
-date-released: 2026-10-27
+version: 1.1.0
+date-released: 2026-10-30
 license: MIT
-doi: 10.5281/zenodo.23700935
+doi: 10.5281/zenodo.23700934
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23700934
+    description: Concept DOI (resolves to the latest archived version)
+  - type: doi
+    value: 10.5281/zenodo.23700935
+    description: Version 1.0.0, released 2026-10-27
 repository-code: "https://github.com/Caithedoc/aou-wildfire-heat-sleep"
 keywords:
   - wildfire smoke
